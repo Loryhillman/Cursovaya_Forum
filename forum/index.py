@@ -12,10 +12,12 @@ def render_template(template_name='index.html', context={}):
     return html_str
 
 def mainpage(environ):
-    return render_template(template_name='P:\Projects_from_python\Kursovaya_Forum\Forum\index.html', context={})
+    return render_template(template_name='index.html', context={})
 
 def topic(environ):
     return render_template(template_name='topic.html', context={})
+
+
 
 def app(environ, start_response):
     path = environ.get("PATH_INFO")
@@ -27,7 +29,8 @@ def app(environ, start_response):
     
     start_response(
         f"200 OK", [
-            ("Content-type", "text/html")
+            ("Content-type", "text/html; charset=utf-8")
+
         ]
     )
 
