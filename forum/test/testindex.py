@@ -6,7 +6,7 @@ from pprint import pprint
 def render_template(template_name='index.html', context={}):
 
     html_str=""
-    with open(template_name, "r") as f:
+    with open(template_name, "r", encoding="UTF-8") as f:
         html_str=f.read()
         html_str=html_str.format(**context)
     
@@ -15,10 +15,10 @@ def render_template(template_name='index.html', context={}):
 
 
 def mainpage(environ):
-    return render_template(template_name='templates\index.html', context={})
+    return render_template(template_name='Forum/templates/index.html', context={})
 
 def topic(environ):
-    return render_template(template_name='templates\\topic.html', context={})
+    return render_template(template_name='Forum/templates/topic.html', context={})
 
 adresses = {
     "/" : mainpage,
@@ -39,7 +39,7 @@ def app(environ, start_response):
     if path in adresses:
         data = adress_parse(path, environ)
     else:
-        data = render_template(template_name='templates\\404.html', context={"path":path})
+        data = render_template(template_name="Forum/templates/404.html", context={})
         
     data = data.encode("utf-8")
     

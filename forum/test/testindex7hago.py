@@ -21,7 +21,7 @@ def app(environ, start_response):
     elif path == "/contact":
         data = contact_us(environ)
     else:
-        data = render_template(template_name='404.html', context={"path":path})
+        data = render_template(template_name='404.html', context={})
     data = data.encode("utf-8")
     start_response(
         f"200 OK", [
