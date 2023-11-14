@@ -1,6 +1,5 @@
 from waitress import serve
 import sys
-from pprint import pprint
 
 
 def render_template(template_name='index.html', context={}):
@@ -51,5 +50,5 @@ def app(environ, start_response):
 
 
     return iter([data])
-print(sys.path)
+
 serve(app)
