@@ -7,7 +7,7 @@ class StaticView(View):
     def get(self, environ):
         
         path = environ.get("PATH_INFO")
-        new_path = path.replace('/', 'Forum/', 1)
+        new_path = path.replace('/', '', 1)
         content_type, _ = mimetypes.guess_type(new_path)
         if not content_type:
             content_type = 'application/octet-stream'

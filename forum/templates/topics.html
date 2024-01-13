@@ -1,12 +1,11 @@
 <!DOCTYPE html>
-<html lang="ru">
-  <head>
-    <meta charset="UTF-8">
-    <title>Главная страница</title>
-    <link rel="stylesheet" href="src/css/style.css">
-    <link rel="stylesheet" href="src/css/forum-index-style.css">
-</head>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Forum Topic</title>
+    <link rel="stylesheet" href="src/css/style.css">
+</head>
 <body>
     <header>
         <nav>
@@ -18,16 +17,16 @@
         </nav>
     </header>
 
-    <main>
-        <section class="forum-main">
-            <h1>Добро пожаловать на форум</h1>
-            <p>Смотрите и общайтесь на разные темы!</p>
 
-        </section>
+
+    <main>
+        {% content %}
     </main>
+
 
     <footer>
         <p>© 2023 8chan. Все права защищены.</p>
     </footer>
 </body>
+
 </html>

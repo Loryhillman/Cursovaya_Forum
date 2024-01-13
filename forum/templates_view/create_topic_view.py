@@ -1,8 +1,8 @@
 from templates_view.base_view import View
 from render_template import render_template
 
-class IndexView(View):
-    template = 'templates/index.html'
+class Create_topicView(View):
+    template = 'templates/create_topic.html'
     headers = {"Content-type": 'text/html; charset=UTF-8'}
 
     def get(self, environ):
