@@ -4,8 +4,8 @@ import base64
 import pymysql.cursors
 
 host = "localhost"
-user = "root"
-password = "mypassword"
+user = "admin"
+password = "PaulLizzka2002!"
 db_name = "topic"
 
 def get_topics_from_db():
