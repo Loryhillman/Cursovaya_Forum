@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../src/css/style.css">
+    <link rel="stylesheet" href="../src/css/forum-index-style.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Главная</a></li>
+                <li><a href="/topics">Темы</a></li>
+                <li class="profile-nav"><a href="/profile">Профиль</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="topic-title"></div>
+    <div class="topic-author"></div>
+    <div class="topic-message"></div>
+    <div class="topic-date"></div>
+    <div id="messageContainer"></div>
+    <main>
+        <section class="message-form">
+            <h2>Отправить сообщение</h2>
+            <form id="messageForm" enctype="multipart/form-data">
+                <label for="message">Сообщение:</label>
+                <textarea id="message" name="message_text" rows="4" required></textarea>
+
+                <button type="submit">Отправить</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>© 2023 8chan. Все права защищены.</p>
+    </footer>
+</body>
+<script src="../src/js/topic_page.js"></script>
+
+</html>
