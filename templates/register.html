@@ -23,20 +23,20 @@
     <main>
         <section class="forum-main">
             <h1>Добро пожаловать на форум</h1>
-            <p>Смотрите и общайтесь на разные темы!</p>
+            <p>Зарегайся додж!</p>
         </section>
         <section class="forum-auth">
-            <h2>Авторизация</h2>
-            <form id="loginForm" action="/profile" method="post">
+            <h2>Регистрация</h2>
+            <form id="registerForm" action="/register" method="post">
                 <label for="username">Имя пользователя:</label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="login" name="login" required>
 
                 <label for="password">Пароль:</label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="passwordUser" name="password_user" required>
 
-                <button type="submit">Войти</button>
+                <button type="submit">Зарегистрироваться</button>
             </form>
-            <a href="/register">Нет аккаунта? Зарегестрируйтесь</a>
+            <a href="/">Уже есть аккаунт? Авторизуйтесь</a>
         </section>
     </main>
 
@@ -44,6 +44,6 @@
         <p>© 2023 8chan. Все права защищены.</p>
     </footer>
 </body>
-<script src="../src/js/index.js"></script>
+<script src="../src/js/register.js"></script>
 
 </html>

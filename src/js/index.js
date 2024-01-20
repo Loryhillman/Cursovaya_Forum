@@ -6,10 +6,12 @@
     // Если пользователь авторизован, скрываем форму
     if (isLoggedIn) {
         document.querySelector(".profile-nav").style = "display: block";
+        document.querySelector(".topic-nav").style = "display: block";
         document.querySelector('.forum-auth').style.display = 'none';
     } else {
         // Если пользователь не авторизован, добавляем обработчик для формы
         document.querySelector(".profile-nav").style = "display: none";
+        document.querySelector(".topic-nav").style = "display: none";
         document.getElementById('loginForm').addEventListener('submit', function (event) {
             event.preventDefault();
             const username = document.getElementById('username').value;

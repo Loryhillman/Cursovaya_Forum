@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru">
-  <head>
+
+<head>
     <meta charset="UTF-8">
     <title>Предложить новость</title>
     <link rel="stylesheet" href="src/css/style.css">
@@ -13,6 +14,8 @@
             <ul>
                 <li><a href="/">Главная</a></li>
                 <li><a href="/topics">Темы</a></li>
+                <li class="profile-nav"><a href="/profile">Профиль</a></li>
+                <li class="topic-nav"><a href="/create_topic">Создать тему</a></li>
             </ul>
         </nav>
     </header>
@@ -20,15 +23,9 @@
     <main>
         <section>
             <h1>Создать топик</h1>
-            <form action="/create_topic" method="post">
+            <form action="/create_topic" id="topicForm" method="post">
                 <label for="title">Название:</label>
                 <input type="text" id="title" name="title" required><br>
-
-                <label for="author">Автор:</label>
-                <input type="text" id="author" name="author" required><br>
-
-                <label for="date">Дата:</label>
-                <input type="text" id="date" name="date" required><br>
 
                 <label for="message">Содержание топика:</label>
                 <textarea id="message" name="message" rows="4" required></textarea><br>
@@ -36,13 +33,12 @@
                 <input type="submit" value="Предложить">
             </form>
         </section>
-
-        {% content %}
     </main>
 
     <footer>
         <p>© 2023 8chan. Все права защищены.</p>
     </footer>
 </body>
+<script src="../src/js/create_topic.js"></script>
 
 </html>

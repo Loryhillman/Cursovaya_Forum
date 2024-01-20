@@ -3,11 +3,13 @@
 
     if (usernameCookie) {
         document.querySelector(".profile-nav").style = "display: block";
+        document.querySelector(".topic-nav").style = "display: block";
         document.querySelector(".message-form").style = "display: block";
     }
     else {
         document.querySelector(".profile-nav").style = "display: none";
         document.querySelector(".message-form").style = "display: none";
+        document.querySelector(".topic-nav").style = "display: none";
     }
 
 
@@ -71,12 +73,22 @@
         const messageContainer = document.querySelector("#messageContainer");
         messageContainer.innerHTML = "";
         messages.forEach(message => {
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            today = mm + '/' + dd + '/' + yyyy;
+
             const messageElement = document.createElement("div");
             messageElement.classList.add("message");
 
             const userElement = document.createElement("div");
             userElement.classList.add("user");
-            userElement.textContent = message.login;
+            userElement.textContent = message.login + ":";
+
+            const dateText = document.createElement("div")
+            dateText.classList.add("date")
+            dateText.textContent = today;
 
             const textElement = document.createElement("div");
             textElement.classList.add("text");
@@ -85,6 +97,7 @@
             // Добавляем элементы в контейнер сообщений
             messageElement.appendChild(userElement);
             messageElement.appendChild(textElement);
+            messageElement.appendChild(dateText)
             messageContainer.appendChild(messageElement);
         });
     }

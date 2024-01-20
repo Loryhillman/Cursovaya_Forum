@@ -67,6 +67,23 @@ main {
 
 .topic-body {}
 
+.text {
+    margin-left: 20px;
+    width: 300px;
+    word-wrap: break-word;
+}
+
+.user {
+    font-weight: bold;
+}
+
+.date {
+    width: 10%;
+    margin-left: auto;
+    text-align: right;
+}
+
+
 footer {
     background-color: #333;
     color: white;

@@ -1,10 +1,9 @@
 (function () {
     const usernameCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('username='));
-    // const username = usernameCookie.split('=')[1];
-    // console.log(decodeURIComponent(username))
     if (usernameCookie) {
         const username = usernameCookie.split('=')[1];
         document.querySelector(".profile-nav").style = "display: block";
+        document.querySelector(".topic-nav").style = "display: block";
         document.querySelector('.name').innerText = `Привет, ${decodeURIComponent(username)}!`;
         document.querySelector(".btn-exit").style = "display: block;";
         document.querySelector(".alert-message").innerHTML = "";

@@ -3,9 +3,11 @@
 
     if (usernameCookie) {
         document.querySelector(".profile-nav").style = "display: block";
+        document.querySelector(".topic-nav").style = "display: block";
     }
     else {
         document.querySelector(".profile-nav").style = "display: none";
+        document.querySelector(".topic-nav").style = "display: none";
     }
     fetch('/api/topic')
         .then((response) => {
