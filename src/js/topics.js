@@ -9,7 +9,7 @@
         document.querySelector(".profile-nav").style = "display: none";
         document.querySelector(".topic-nav").style = "display: none";
     }
-    fetch('/api/topic')
+    fetch('/topic')
         .then((response) => {
             return response.json();
         })

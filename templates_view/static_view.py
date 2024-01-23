@@ -1,6 +1,14 @@
 import mimetypes
 
 def serve_file(path, start_response):
+    """
+    Args:
+- `path` (str): Путь к запрашиваемому статическому файлу.
+- `start_response` (callable): Функция для установки статуса и заголовков ответа.
+
+Returns:
+- `list`: Список с байтами содержимого файла.
+    """
     new_path = path.replace('/', '', 1)
     try:
         with open(new_path, 'rb') as f:

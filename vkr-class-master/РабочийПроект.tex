@@ -1,81 +1,64 @@
 \section{Рабочий проект}
 \subsection{Классы, используемые при разработке сайта}
 
-Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблица \ref{class:table}). Пример таблицы с уменьшенным межстрочным интервалом.
+Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблица \ref{class:table}).
 
 \renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
 \begin{xltabular}{\textwidth}{|X|p{2.5cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{4.85cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{4.85cm}|}
-\caption{Описание классов Bitrix, используемых в приложении\label{class:table}}\\
+\caption{Описание классов View, используемых в приложении\label{class:table}}\\
 \hline \centrow \setlength{\baselineskip}{0.7\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Модуль, к которому относится класс & \centrow Описание класса & \centrow Методы \\
 \hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\ \hline
 \endfirsthead
 \caption*{Продолжение таблицы \ref{class:table}}\\
 \hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\ \hline
 \finishhead
-CMain & Главный модуль & CMain – главный класс страницы web-приложения. После одного из этапов по загрузке страницы в сценарии становится доступным инициализированный системой объект данного класса с именем \$APPLICATION & void ShowTitle(string property\_code = «title», bool strip\_tags = true)
-Выводит заголовок страницы
-void SetTitle(string title)
-Устанавливает заголовок страницы
+View & Главный модуль & View – главный класс для взаимодействия сервера со страницами web-приложения. Является родительским (абстрактным) классом для всех View классов, таких как, например, IndexView (отображение html шаблона), StaticView (обработка статических файлов), GetTopicView (GET - запрос) и т.п. & template = '' - 
+переменная для дочерних классов View связанных с отображением html шаблонов
+def get(self, environ) - 
+функция для дочерних классов View связанных с GET запросами \\
+\hline CreateTopicView & Главный модуль & CreateTopicView – Класс для работы со страницей создания темы & template = 'templates/create\_topic.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения страницы создания темы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline IndexView & Главный модуль & IndexView – Класс для работы с главной страницей форума & template = 'templates/index.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения главной страницы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline RegisterView & Главный модуль & RegisterView – Класс для работы со страницей для регистрации & template = 'templates/register.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения страницы регистрации (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline TopicPageView & Главный модуль & TopicPageView – Класс для работы со страницей определенной темы & template = 'templates/topic\_page.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения страницы определенной темы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline TopicsView & Главный модуль & TopicsView – Класс для работы со страницей тем & template = 'templates/topics.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения страницы тем (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline UserView & Главный модуль & UserView – Класс для работы со страницей личного профиля & template = 'templates/user.html' - переменная содержащая в себе адрес html файла.
+def get(self, environ) - функция для отображения страницы профиля (возвращает функцию render\_template(template\_name=self.template, context={})) \\
+\hline RegisterView & Главный модуль & GetTopicView – Класс для работы со страницей для регистрации & template = 
+def get(self, environ) - функция для передачи в БД GET запроса (возвращает функцию get\_topics\_from\_db() \\
+\hline RegisterView & Главный модуль & GetUsersView – Класс для работы со страницей для регистрации & template = 
+def get(self, environ) - функция для передачи в БД GET запроса (возвращает функцию get\_users\_from\_db() \\
 
-void ShowCSS(bool external = true, bool XhtmlStyle = true)
-Выводит таблицу стилей CSS страницы\\
-\hline CFile & Главный модуль & CFile – Класс для работы с файлами и изображениями & array GetFileArray (int file\_id)
-Метод возвращает массив, содержащий описание файла (путь к файлу, имя файла, размер) с идентификатором file\_id
 \end{xltabular}
 \renewcommand{\arraystretch}{1.0} % восстановление сетки
 
-\subsection{Модульное тестирование разработанного web-сайта}
-
-Модульный тест для класса User из модели данных представлен на рисунке \ref{unitUser:image}.
-
-\begin{figure}[ht]
-\begin{lstlisting}[language=Python]
-from django.test import TestCase
-from .models import *
-User = get_user_model()
-
-
-class ShpoTestCases(TestCase):
-
-    def setUp(self) -> None:
-        self.user = User.objects.create(username='testtestovich', password='testtestovich', first_name='Sad', last_name='')
-
-    def test_2(self):
-
-        self.assertEqual(self.user.first_name, 'Sad')
-        self.assertEqual(self.user.last_name, 'Cat')
-        print((self.user))
-        print((self.user.first_name))
-        print((self.user.last_name))
-\end{lstlisting}  
-\caption{Модульный тест класса User}
-\label{unitUser:image}
-\end{figure}
-
+\newpage
 \subsection{Системное тестирование разработанного web-сайта}
 
-На рисунке \ref{main:image} представлена главная страница сайта «Русатом – Аддитивные технологии».
-\newpage % при необходимости можно переносить рисунок на новую страницу
+На рисунке \ref{main:image} представлена главная страница сайта форума «8chan».
+
 \begin{figure}[H] % H - рисунок обязательно здесь, или переносится, оставляя пустоту
 \center{\includegraphics[width=1\linewidth]{main1}}
-\center{\includegraphics[width=1\linewidth]{main2}}
-\center{\includegraphics[width=1\linewidth]{main3}}
-\caption{Главная страница сайта «Русатом – Аддитивные технологии»}
+\caption{Главная страница сайта «8chan»}
 \label{main:image}
 \end{figure}
 
-На рисунке \ref{menu:image} представлен динамический вывод заголовков, включающий в себя искомые фразы при поиске фраз.
+На рисунке \ref{menu:image} представлен динамический вывод тем.
 
 \begin{figure}[ht]
 \center{\includegraphics[width=1\linewidth]{menu}}
-\caption{Динамический вывод заголовков}
+\caption{Динамический вывод тем}
 \label{menu:image}
 \end{figure}
 
-На рисунке \ref{enter:image} представлен ввод данных для публикации новости.
+На рисунке \ref{enter:image} представлен ввод данных для публикации темы.
 
 \begin{figure}[ht]
 \center{\includegraphics[width=1\linewidth]{enter}}
-\caption{Ввод данных для публикации очень-очень длинной, интересной и полезной новости}
+\caption{Ввод данных для публикации темы}
 \label{enter:image}
 \end{figure}

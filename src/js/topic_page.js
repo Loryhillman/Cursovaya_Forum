@@ -103,7 +103,7 @@
     }
 
     let productWithId;
-    fetch('/api/topic')
+    fetch('/topic')
         .then((response) => {
             return response.json();
         })

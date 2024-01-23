@@ -17,7 +17,7 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            fetch('/api/users')
+            fetch('/users')
                 .then((response) => response.json())
                 .then((users) => {
                     const user = users.find(u => u.login === username && u.password === password);

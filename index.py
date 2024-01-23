@@ -3,12 +3,12 @@ from urllib.parse import parse_qs
 from waitress import serve
 from templates_view.index_view import IndexView
 from templates_view.topics_view import TopicsView
-from templates_view.topic_page import TopicPage
+from templates_view.topic_page_view import TopicPageView
 from templates_view.user import UserView
 from templates_view.register_view import RegisterView
-from json_obj.get_users import GetUsers
-from json_obj.get_topic import GetTopic
-from templates_view.create_topic_view import Create_topicView
+from templates_view.get_users_view import GetUsersView
+from templates_view.get_topic_view import GetTopicView
+from templates_view.create_topic_view import CreateTopicView
 from render_template import render_template
 from templates_view.static_view import serve_static_file
 from db.connect import send_message, get_messages_with_username, create_topic, create_user
@@ -17,17 +17,26 @@ import mimetypes
 adresses = {
     "/" : IndexView,
     "/topics" : TopicsView,
-    "/create_topic" : Create_topicView,
-    "/api/topic": GetTopic,
-    "/api/users": GetUsers,
-    "/topic/": TopicPage,
+    "/create_topic" : CreateTopicView,
+    "/topic": GetTopicView,
+    "/users": GetUsersView,
+    "/topic/": TopicPageView,
     "/profile": UserView,
     "/register": RegisterView
 }
 
 def app(environ, start_response):
     path = environ.get("PATH_INFO")
+    """
+    Основная функция приложения для обработки HTTP-запросов.
 
+    Args:
+    - `environ` (dict): Словарь, содержащий переменные окружения для запроса.
+    - `start_response` (callable): Функция для инициации HTTP-ответа.
+
+    Returns:
+    - `iterable`: Итерируемый объект строк, представляющих тело HTTP-ответа.
+    """
 
     if environ['REQUEST_METHOD'] == 'POST':
         if path == '/api/send_message':

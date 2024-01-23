@@ -19,7 +19,7 @@
     });
 
     async function createUser(formData) {
-        const url = '/api/create_user';
+        const url = 'api/create_user';
         try {
             const response = await fetch(url, {
                 method: 'POST',
