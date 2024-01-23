@@ -1,186 +1,78 @@
 import pymysql
 import json
-import base64
-import pymysql.cursors
-import requests
 
+# Параметры подключения к базе данных
 host = "localhost"
 user = "root"
 password = "mypassword"
 db_name = "topic"
 
-def get_topics_from_db():
-    topics = []
+def get_connection():
+    return pymysql.connect(
+        host=host,
+        port=3306,
+        user=user,
+        password=password,
+        database=db_name,
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
+def execute_query(query, *args):
     try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
+        connection = get_connection()
         print("Successfully connected to the database")
-
-        try: 
-            with connection.cursor() as cursor:
-                select_all_rows = "SELECT * FROM `topics`"
-                cursor.execute(select_all_rows)
-                rows = cursor.fetchall()
-                for row in rows:
-                    topics.append(row)
-                json_string = json.dumps(topics)
-                return json_string 
-        finally:
-            connection.close()
-
+        with connection.cursor() as cursor:
+            cursor.execute(query, args)
+            rows = cursor.fetchall()
+            result = [row for row in rows]
+            json_string = json.dumps(result)
+            return json_string
     except Exception as ex:
         print("Connection refused...")
         print(ex)
+    finally:
+        connection.close()
+
+def send_query(query, *args):
+    try:
+        connection = get_connection()
+        print("Successfully connected to the database")
+        with connection.cursor() as cursor:
+            cursor.execute(query, args)
+            connection.commit()
+            print("Operation successful:", cursor.lastrowid)
+    except Exception as ex:
+        print("Connection refused...")
+        print(ex)
+    finally:
+        connection.close()
+
+def get_topics_from_db():
+    query = "SELECT * FROM `topics`"
+    return execute_query(query)
 
 def get_users_from_db():
-    topics = []
-    try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("Successfully connected to the database")
-
-        try: 
-            with connection.cursor() as cursor:
-                select_all_rows = "SELECT * FROM `users`"
-                cursor.execute(select_all_rows)
-                rows = cursor.fetchall()
-                for row in rows:
-                    topics.append(row)
-                json_string = json.dumps(topics)
-                print(json_string)
-                return json_string 
-        finally:
-            connection.close()
-
-    except Exception as ex:
-        print("Connection refused...")
-        print(ex)
-
+    query = "SELECT * FROM `users`"
+    return execute_query(query)
 
 def send_message(id_user_message, message_text, topic_id):
-    try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("successfully connected")
-
-        try:
-            with connection.cursor() as cursor:
-                send_message_query = "INSERT INTO `messages` (`id_user_message`, `message_text`, `topic_id`) VALUES (%s, %s, %s)"
-                cursor.execute(send_message_query, (id_user_message, message_text, topic_id))
-                connection.commit()
-                print("Message sended:", cursor.lastrowid)
-        finally:
-            connection.close()
-
-    except Exception as ex:
-        print("Connection refused...")
-        print(ex)
-
+    query = "INSERT INTO `messages` (`id_user_message`, `message_text`, `topic_id`) VALUES (%s, %s, %s)"
+    send_query(query, id_user_message, message_text, topic_id)
 
 def create_topic(title, author, message, date):
-    try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("successfully connected")
-
-        try:
-            with connection.cursor() as cursor:
-                create_topic_query = "INSERT INTO `topics` (`title`, `author`, `message`, `date`) VALUES (%s, %s, %s, %s)"
-                cursor.execute(create_topic_query, (title, author, message, date))
-                connection.commit()
-                print("Topic created:", cursor.lastrowid)
-        finally:
-            connection.close()
-
-    except Exception as ex:
-        print("Connection refused...")
-        print(ex)
+    query = "INSERT INTO `topics` (`title`, `author`, `message`, `date`) VALUES (%s, %s, %s, %s)"
+    send_query(query, title, author, message, date)
 
 def create_user(login, password_user):
-    try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("successfully connected")
-
-        try:
-            with connection.cursor() as cursor:
-                create_user_query = "INSERT INTO `users` (`login`, `password`) VALUES (%s, %s)"
-                cursor.execute(create_user_query, (login, password_user))
-                connection.commit()
-                print("User created:", cursor.lastrowid)
-        finally:
-            connection.close()
-
-    except Exception as ex:
-        print("Connection refused...")
-        print(ex)
-
+    query = "INSERT INTO `users` (`login`, `password`) VALUES (%s, %s)"
+    send_query(query, login, password_user)
 
 def get_messages_with_username(topic_id):
-    messages = []
-    try:
-        connection = pymysql.connect(
-            host=host,
-            port=3306,
-            user=user,
-            password=password,
-            database=db_name,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        print("Успешное подключение к базе данных")
-
-        try:
-            with connection.cursor() as cursor:
-                select_all_rows = """
-                    SELECT messages.id_message, messages.message_text, users.login
-                    FROM `messages`
-                    JOIN users ON messages.id_user_message = users.id_user
-                    WHERE messages.topic_id = %s
-                    ORDER BY messages.id_message ASC
-                """
-                cursor.execute(select_all_rows, (topic_id))
-                rows = cursor.fetchall()
-                for row in rows:
-                    messages.append(row)
-                json_string = json.dumps(messages)
-                print(json_string)
-                return json_string
-        finally:
-            connection.close()
-
-    except Exception as ex:
-        print("Отказано в соединении...")
-        print(ex)
-
-
-
+    query = """
+        SELECT messages.id_message, messages.message_text, users.login
+        FROM `messages`
+        JOIN users ON messages.id_user_message = users.id_user
+        WHERE messages.topic_id = %s
+        ORDER BY messages.id_message ASC
+    """
+    return execute_query(query, topic_id)
