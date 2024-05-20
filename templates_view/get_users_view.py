@@ -10,4 +10,7 @@ class GetUsersView:
         Returns:
         - `str`: Строка с данными для ответа на GET-запрос.
         """
-        return get_users_from_db()
+
+        data = get_users_from_db()
+        content_type = "application/json"
+        return data, content_type

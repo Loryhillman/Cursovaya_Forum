@@ -1,28 +1,15 @@
 import mimetypes
 
-def serve_file(path, start_response):
-    """
-    Args:
-- `path` (str): Путь к запрашиваемому статическому файлу.
-- `start_response` (callable): Функция для установки статуса и заголовков ответа.
-
-Returns:
-- `list`: Список с байтами содержимого файла.
-    """
-    new_path = path.replace('/', '', 1)
-    try:
-        with open(new_path, 'rb') as f:
-            content = f.read()
-        mime_type, _ = mimetypes.guess_type(new_path)
-        if mime_type is None:
-            mime_type = 'application/octet-stream'
-        start_response("200 OK", [("Content-type", mime_type)])
-        return [content]
-    except FileNotFoundError:
-        start_response("404 Not Found", [("Content-type", "text/plain")])
-        return [b"404 Not Found"]
-    
-
-def serve_static_file(path, start_response):
-    if path.startswith("/src/"):
-        return serve_file(path, start_response)
+class StaticView:
+    def get(self, environ):
+        path = environ.get('PATH_INFO', '')
+        new_path = path.lstrip('/')
+        try:
+            with open(new_path, 'rb') as f:
+                content = f.read()
+            mime_type, _ = mimetypes.guess_type(new_path)
+            if mime_type is None:
+                mime_type = 'application/octet-stream'
+            return content, mime_type
+        except FileNotFoundError:
+            return b"404 Not Found", "text/plain"

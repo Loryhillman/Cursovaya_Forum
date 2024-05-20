@@ -1,5 +1,8 @@
-from db.connect import get_topics_from_db
-class GetTopicView:
+from db.connect import get_messages_with_username
+from urllib.parse import parse_qs
+
+
+class GetMessagesView:
     def get(self, environ):
         """
         Обработка GET-запроса для получения списка тем.
@@ -10,8 +13,10 @@ class GetTopicView:
         Returns:
         - `str`: Строка с данными для ответа на GET-запрос.
         """
-
-    def get(self, environ):
-        data = get_topics_from_db()
+        query_string = environ.get('QUERY_STRING', '')
+        query_params = parse_qs(query_string)
+        topic_id = query_params.get('topic_id', [''])[0]
+        response_data = get_messages_with_username(topic_id)
         content_type = "application/json"
-        return data, content_type
+        return response_data, content_type
+
