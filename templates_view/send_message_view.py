@@ -1,9 +1,8 @@
 import cgi
-
 from db.connect import send_message
+from templates_view.base_view import View
 
-
-class SendMessageView():
+class SendMessageView(View):
     def post(self, environ):
         form = cgi.FieldStorage(fp=environ['wsgi.input'], environ=environ)
         id_user_message = form.getvalue('id_user_message', '')

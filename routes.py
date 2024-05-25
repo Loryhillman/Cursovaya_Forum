@@ -31,7 +31,6 @@ routes = [
 
 def route_request(environ, start_response):
     path = environ.get("PATH_INFO")
-    method = environ['REQUEST_METHOD']
 
 
     view_class = None
@@ -42,10 +41,7 @@ def route_request(environ, start_response):
 
     if view_class:
         view_instance = view_class()
-        if method == 'POST' and hasattr(view_instance, 'post'):
-            data, content_type = view_instance.post(environ)
-        else:
-            data, content_type = view_instance.get(environ)
+        data, content_type = view_instance.handle(environ)
     else:
         data, content_type = render_template(template_name='templates/404.html', context={})
 

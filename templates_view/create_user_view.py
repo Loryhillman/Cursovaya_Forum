@@ -1,9 +1,9 @@
 import cgi
 
 from db.connect import create_user
+from templates_view.base_view import View
 
-
-class CreateUserView():
+class CreateUserView(View):
     def post(self, environ):
         form = cgi.FieldStorage(fp=environ['wsgi.input'], environ=environ)
         login = form.getvalue('login', '')

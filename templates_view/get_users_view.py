@@ -1,5 +1,6 @@
 from db.connect import get_users_from_db
-class GetUsersView:
+from templates_view.base_view import View
+class GetUsersView(View):
     def get(self, environ):
         """
         Обработка GET-запроса для получения списка пользователей.

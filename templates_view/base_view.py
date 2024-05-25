@@ -1,8 +1,20 @@
-from abc import ABC, abstractmethod
 from render_template import render_template
 
-class View(ABC):
+class View():
     template = ''
-    @abstractmethod
+
     def get(self, environ):
         pass
+
+    def post(self, environ):
+        pass
+
+    def handle(self, environ):
+
+        request_method = environ['REQUEST_METHOD']
+
+        if request_method == 'GET':
+            return self.get(environ)
+        else:
+            return self.post(environ)
+

@@ -1,5 +1,7 @@
 from db.connect import get_topics_from_db
-class GetTopicView:
+from templates_view.base_view import View
+
+class GetTopicView(View):
     def get(self, environ):
         """
         Обработка GET-запроса для получения списка тем.

@@ -1,8 +1,8 @@
 from db.connect import get_messages_with_username
 from urllib.parse import parse_qs
+from templates_view.base_view import View
 
-
-class GetMessagesView:
+class GetMessagesView(View):
     def get(self, environ):
         """
         Обработка GET-запроса для получения списка тем.

@@ -2,8 +2,9 @@ import cgi
 
 from db.connect import create_topic
 from render_template import render_template
+from templates_view.base_view import View
 
-class CreateTopicView():
+class CreateTopicView(View):
     template = 'templates/create_topic.html'
     def get(self, environ):
         """
