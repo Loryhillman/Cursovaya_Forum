@@ -12,6 +12,7 @@ from templates_view.get_topic_view import GetTopicView
 from templates_view.get_messages_view import GetMessagesView
 from templates_view.create_topic_view import CreateTopicView
 from templates_view.static_view import StaticView
+from templates_view.error_view import ErrorView
 
 routes = [
     (r'^/$', IndexView),
@@ -26,12 +27,12 @@ routes = [
     (r'/create_topic$', CreateTopicView),
     (r'/api/create_topic$', CreateTopicView),
     (r'/api/get_messages$', GetMessagesView),
-    (r'^/src/.*$', StaticView)
+    (r'^/src/.*$', StaticView),
+    (r'.*', ErrorView)
 ]
 
 def route_request(environ, start_response):
     path = environ.get("PATH_INFO")
-
 
     view_class = None
     for pattern, view in routes:
@@ -39,11 +40,8 @@ def route_request(environ, start_response):
             view_class = view
             break
 
-    if view_class:
-        view_instance = view_class()
-        data, content_type = view_instance.handle(environ)
-    else:
-        data, content_type = render_template(template_name='templates/404.html', context={})
+    view_instance = view_class()
+    data, content_type = view_instance.handle(environ)
 
     data = data.encode("utf-8") if isinstance(data, str) else data
     start_response("200 OK", [("Content-type", content_type)])
