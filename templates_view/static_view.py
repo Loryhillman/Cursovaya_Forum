@@ -1,4 +1,6 @@
 import mimetypes
+
+from response import Response
 from templates_view.base_view import View
 
 class StaticView(View):
@@ -11,6 +13,6 @@ class StaticView(View):
             mime_type, _ = mimetypes.guess_type(new_path)
             if mime_type is None:
                 mime_type = 'application/octet-stream'
-            return content, mime_type
+            return Response(data=content, content_type=mime_type, code=200)
         except FileNotFoundError:
-            return b"404 Not Found", "text/plain"
+            return Response(data=content, content_type=mime_type, code=200)

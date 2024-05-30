@@ -1,4 +1,5 @@
 from db.connect import get_users_from_db
+from response import Response
 from templates_view.base_view import View
 class GetUsersView(View):
     def get(self, environ):
@@ -14,4 +15,4 @@ class GetUsersView(View):
 
         data = get_users_from_db()
         content_type = "application/json"
-        return data, content_type
+        return Response(data=data, content_type=content_type, code=200)

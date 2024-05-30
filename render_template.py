@@ -12,8 +12,5 @@ def render_template(template_name, context={}):
         html_str = f.read()
         html_str = html_str.format(*context)
 
-    content_type, _ = mimetypes.guess_type(template_name)
-    if content_type is None:
-        content_type = 'text/html; charset=UTF-8'
-    return html_str, content_type
+    return html_str
 

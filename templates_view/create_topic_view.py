@@ -3,7 +3,7 @@ import cgi
 from db.connect import create_topic
 from render_template import render_template
 from templates_view.base_view import View
-
+from response import Response
 class CreateTopicView(View):
     template = 'templates/create_topic.html'
     def get(self, environ):
@@ -16,7 +16,10 @@ class CreateTopicView(View):
         Returns:
         - `str`: Строка с HTML-кодом формы создания темы.
         """
-        return render_template(template_name=self.template, context={})
+
+        data = render_template(template_name=self.template, context={})
+
+        return Response(data=data, content_type='text/html', code=200)
     def post(self, environ):
         form = cgi.FieldStorage(fp=environ['wsgi.input'], environ=environ)
         title = form.getvalue('title', '')
@@ -24,5 +27,5 @@ class CreateTopicView(View):
         message = form.getvalue('message', '')
         date = form.getvalue('date', '')
         create_topic(title, author, message, date)
-        return b'{"status": "success"}', "application/json"
+        return Response(data='{"status": "success"}', content_type="application/json", code=200)
 

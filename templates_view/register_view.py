@@ -1,3 +1,4 @@
+from response import Response
 from templates_view.base_view import View
 from render_template import render_template
 
@@ -13,4 +14,6 @@ class RegisterView(View):
         Returns:
         - `str`: Строка с данными для ответа на GET-запрос.
         """
-        return render_template(template_name=self.template, context={})
+        data = render_template(template_name=self.template, context={})
+
+        return Response(data=data, content_type='text/html', code=200)

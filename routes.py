@@ -41,8 +41,9 @@ def route_request(environ, start_response):
             break
 
     view_instance = view_class()
-    data, content_type = view_instance.handle(environ)
+    response = view_instance.handle(environ)
 
-    data = data.encode("utf-8") if isinstance(data, str) else data
-    start_response("200 OK", [("Content-type", content_type)])
-    return [data]
+    start_response(response.code, [("Content-type", response.content_type)])
+    return [response.get_data()]
+
+

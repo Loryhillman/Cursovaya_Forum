@@ -1,6 +1,7 @@
 from db.connect import get_messages_with_username
 from urllib.parse import parse_qs
 from templates_view.base_view import View
+from response import Response
 
 class GetMessagesView(View):
     def get(self, environ):

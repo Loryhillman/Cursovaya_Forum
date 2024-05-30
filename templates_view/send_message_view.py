@@ -1,5 +1,6 @@
 import cgi
 from db.connect import send_message
+from response import Response
 from templates_view.base_view import View
 
 class SendMessageView(View):
@@ -9,4 +10,4 @@ class SendMessageView(View):
         message_text = form.getvalue('message_text', '')
         topic_id = form.getvalue('topic_id', '')
         send_message(id_user_message, message_text, topic_id)
-        return b'{"status": "success"}', "application/json"
+        return Response(data='{"status": "success"}', content_type="application/json", code=200)
