@@ -1,6 +1,4 @@
-from response import Response
-from templates_view.base_view import View
-from render_template import render_template
+from templates_view.template_view import TemplateView
 
 """
 Properties:
@@ -12,18 +10,9 @@ Methods:
 Attributes:
 - `template` (str): Путь к файлу HTML-шаблона для отображения страницы.
 """
-class TopicsView(View):
+
+
+class TopicsView(TemplateView):
+
     template = 'templates/topics.html'
-    def get(self, environ):
-        """
-    Метод для обработки GET-запросов и возвращения HTML-кода страницы.
 
-    Args:
-    - `environ` (dict): Словарь с данными окружения запроса WSGI.
-
-    Returns:
-    - `str`: Сгенерированный HTML-код страницы.
-        """
-        data = render_template(template_name=self.template, context={})
-
-        return Response(data=data, content_type='text/html', code=200)

@@ -1,6 +1,7 @@
 from db.connect import get_users_from_db
 from response import Response
 from templates_view.base_view import View
+
 class GetUsersView(View):
     def get(self, environ):
         """

@@ -3,6 +3,7 @@ import mimetypes
 from response import Response
 from templates_view.base_view import View
 
+
 class StaticView(View):
     def get(self, environ):
         path = environ.get('PATH_INFO', '')
@@ -15,4 +16,4 @@ class StaticView(View):
                 mime_type = 'application/octet-stream'
             return Response(data=content, content_type=mime_type, code=200)
         except FileNotFoundError:
-            return Response(data=content, content_type=mime_type, code=200)
+            return Response(data=content, content_type=mime_type, code=404)
