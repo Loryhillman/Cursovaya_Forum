@@ -12,26 +12,41 @@
 \caption*{Продолжение таблицы \ref{class:table}}\\
 \hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\ \hline
 \finishhead
-View & Главный модуль & View – главный класс для взаимодействия сервера со страницами web-приложения. Является родительским (абстрактным) классом для всех View классов, таких как, например, IndexView (отображение html шаблона), StaticView (обработка статических файлов), GetTopicView (GET - запрос) и т.п. & template = '' - 
-переменная для дочерних классов View связанных с отображением html шаблонов
-def get(self, environ) - 
-функция для дочерних классов View связанных с GET запросами \\
-\hline CreateTopicView & Главный модуль & CreateTopicView – Класс для работы со страницей создания темы & template = 'templates/create\_topic.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения страницы создания темы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline IndexView & Главный модуль & IndexView – Класс для работы с главной страницей форума & template = 'templates/index.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения главной страницы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline RegisterView & Главный модуль & RegisterView – Класс для работы со страницей для регистрации & template = 'templates/register.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения страницы регистрации (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline TopicPageView & Главный модуль & TopicPageView – Класс для работы со страницей определенной темы & template = 'templates/topic\_page.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения страницы определенной темы (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline TopicsView & Главный модуль & TopicsView – Класс для работы со страницей тем & template = 'templates/topics.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения страницы тем (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline UserView & Главный модуль & UserView – Класс для работы со страницей личного профиля & template = 'templates/user.html' - переменная содержащая в себе адрес html файла.
-def get(self, environ) - функция для отображения страницы профиля (возвращает функцию render\_template(template\_name=self.template, context={})) \\
-\hline RegisterView & Главный модуль & GetTopicView – Класс для работы со страницей для регистрации & template = 
-def get(self, environ) - функция для передачи в БД GET запроса (возвращает функцию get\_topics\_from\_db() \\
-\hline RegisterView & Главный модуль & GetUsersView – Класс для работы со страницей для регистрации & template = 
-def get(self, environ) - функция для передачи в БД GET запроса (возвращает функцию get\_users\_from\_db() \\
+View & Главный модуль & View – основной класс для взаимодействия сервера с веб-страницами. Абстрактный класс, от которого наследуются все остальные view-классы. & template = '' – переменная для шаблонов дочерних классов.
+def get(self, environ) – метод обработки GET-запросов.
+def post(self, environ) – метод обработки POST-запросов.
+def handle(self, environ) – метод для определения типа запроса (GET или POST) и вызова соответствующего метода.  \\
+\hline CreateTopicView & Главный модуль & CreateTopicView – класс для обработки страницы создания темы. & template = 'templates/create_topic.html' – путь к HTML шаблону.
+def post(self, environ) – метод для обработки формы создания темы и сохранения данных в базе данных. Возвращает JSON ответ о статусе операции.  \\
+
+\hline ErrorView & Главный модуль & ErrorView – класс для обработки страницы ошибок. & template = template = 'templates/404.html' – путь к HTML шаблону для страницы ошибки.  \\
+
+
+\hline GetMessagesView & Главный модуль & GetMessagesView – класс для получения сообщений с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения сообщений из базы данных и возврата их в формате JSON.  \\
+
+\hline IndexView & Главный модуль & IndexView – класс для отображения главной страницы. & template = 'templates/index.html' – путь к HTML шаблону главной страницы.  \\
+
+\hline GetTopicView & Главный модуль & GetTopicView – класс для получения списка тем с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка тем из базы данных и возврата их в формате JSON.  \\
+
+\hline GetUsersView & Главный модуль & GetUsersView – класс для получения списка пользователей с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка пользователей из базы данных и возврата их в формате JSON.  \\
+
+
+\hline RegisterView & Главный модуль & RegisterView – класс для обработки страницы регистрации. & template = 'templates/register.html' – путь к HTML шаблону страницы регистрации. \\
+
+\hline SendMessageView & Главный модуль & SendMessageView – класс для обработки отправки сообщений. & def post(self, environ) – метод для обработки формы отправки сообщений и сохранения данных в базе данных. Возвращает JSON ответ о статусе операции.   \\
+
+\hline StaticView & Главный модуль & StaticView – класс для обработки статических файлов. & def get(self, environ) – метод для получения статического файла по запросу и возврата его содержимого с соответствующим MIME-типом.   \\
+
+\hline TemplateView & Главный модуль & TemplateView – абстрактный класс для обработки страниц с HTML шаблонами. & template = '' – переменная для пути к HTML шаблону. def get(self, environ) – метод для рендеринга HTML шаблона и возврата его содержимого.   \\
+
+
+\hline TopicPageView & Главный модуль & TopicPageView – класс для отображения страницы конкретной темы. & template = 'templates/topic_page.html' – путь к HTML шаблону страницы темы. \\
+
+
+
+\hline TopicsView & Главный модуль & TopicsView – класс для отображения страницы со списком тем. & template = 'templates/topics.html' – путь к HTML шаблону страницы со списком тем. \\
+
+\hline UserView & Главный модуль & UserView – класс для отображения страницы профиля пользователя. & template = 'templates/user.html' – путь к HTML шаблону страницы профиля.  \\
 
 \end{xltabular}
 \renewcommand{\arraystretch}{1.0} % восстановление сетки

@@ -1,5 +1,8 @@
 from db.connect import get_users_from_db
-class GetUsersView:
+from response import Response
+from templates_view.base_view import View
+
+class GetUsersView(View):
     def get(self, environ):
         """
         Обработка GET-запроса для получения списка пользователей.
@@ -10,4 +13,7 @@ class GetUsersView:
         Returns:
         - `str`: Строка с данными для ответа на GET-запрос.
         """
-        return get_users_from_db()
+
+        data = get_users_from_db()
+        content_type = "application/json"
+        return Response(data=data, content_type=content_type, code=200)
