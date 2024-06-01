@@ -46,6 +46,13 @@
 }
 \newcommand\large{\@setfontsize\large\@xviipt{22}} % большой шрифт
 \newcommand\tiny{\@setfontsize\tiny\@vipt{6pt}} % мелкий шрифт
+\newcommand\small{\@setfontsize\small\@xipt{13.6}}%
+\newcommand\scriptsize{\@setfontsize\scriptsize\@viiipt{9.5}}
+\newcommand\Large{\@setfontsize\Large\@xviipt{22}}
+\newcommand\LARGE{\@setfontsize\LARGE\@xxpt{25}}
+\newcommand\huge{\@setfontsize\huge\@xxvpt{30}}
+\newcommand\Huge{\@setfontsize\Huge\@xxvpt{30}}
+
 
 % Параграфы
 \renewcommand\baselinestretch{\interval} % полуторный интервал
@@ -66,8 +73,8 @@
 \newlength\pheight % высота A4
 \setlength\pagetop{2cm}
 \setlength\pagebottom{2cm}
-\setlength\pageleft{2cm}
-\setlength\pageright{1cm}
+\setlength\pageleft{3cm}
+\setlength\pageright{1.5cm}
 \setlength\pwidth{210mm}
 \setlength\pheight{297mm}
 
