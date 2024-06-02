@@ -1,5 +1,3 @@
-import re
-from render_template import render_template
 from templates_view.create_user_view import CreateUserView
 from templates_view.send_message_view import SendMessageView
 from templates_view.index_view import IndexView
@@ -13,6 +11,9 @@ from templates_view.get_messages_view import GetMessagesView
 from templates_view.create_topic_view import CreateTopicView
 from templates_view.static_view import StaticView
 from templates_view.error_view import ErrorView
+
+
+
 
 routes = [
     (r'^/$', IndexView),
@@ -30,20 +31,3 @@ routes = [
     (r'^/src/.*$', StaticView),
     (r'.*', ErrorView)
 ]
-
-def route_request(environ, start_response):
-    path = environ.get("PATH_INFO")
-
-    view_class = None
-    for pattern, view in routes:
-        if re.match(pattern, path):
-            view_class = view
-            break
-
-    view_instance = view_class()
-    response = view_instance.handle(environ)
-
-    start_response(response.code, [("Content-type", response.content_type)])
-    return [response.get_data()]
-
-

@@ -1,5 +1,5 @@
 from waitress import serve
-from routes import route_request
+from route_request import route_request
 
 def app(environ, start_response):
     return iter(route_request(environ, start_response))
