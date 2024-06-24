@@ -1,55 +1,197 @@
 \section{Рабочий проект}
 \subsection{Классы, используемые при разработке сайта}
 
-Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблица \ref{class:table}).
+Можно выделить следующий список классов и их методов, использованных при разработке web-приложения (таблицы \ref{class:table0} - \ref{class:table13}).
 
 \renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
-\begin{xltabular}{\textwidth}{|X|p{2.5cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{4.85cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{4.85cm}|}
-\caption{Описание классов View, используемых в приложении\label{class:table}}\\
-\hline \centrow \setlength{\baselineskip}{0.7\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Модуль, к которому относится класс & \centrow Описание класса & \centrow Методы \\
-\hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\ \hline
-\endfirsthead
-\caption*{Продолжение таблицы \ref{class:table}}\\
-\hline \centrow 1 & \centrow 2 & \centrow 3 & \centrow 4\\ \hline
-\finishhead
-View & Главный модуль & View – основной класс для взаимодействия сервера с веб-страницами. Абстрактный класс, от которого наследуются все остальные view-классы. & template = '' – переменная для шаблонов дочерних классов.
-def get(self, environ) – метод обработки GET-запросов.
-def post(self, environ) – метод обработки POST-запросов.
-def handle(self, environ) – метод для определения типа запроса (GET или POST) и вызова соответствующего метода.  \\
-\hline CreateTopicView & Главный модуль & CreateTopicView – класс для обработки страницы создания темы. & template = 'templates/create_topic.html' – путь к HTML шаблону.
-def post(self, environ) – метод для обработки формы создания темы и сохранения данных в базе данных. Возвращает JSON ответ о статусе операции.  \\
-
-\hline ErrorView & Главный модуль & ErrorView – класс для обработки страницы ошибок. & template = template = 'templates/404.html' – путь к HTML шаблону для страницы ошибки.  \\
-
-
-\hline GetMessagesView & Главный модуль & GetMessagesView – класс для получения сообщений с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения сообщений из базы данных и возврата их в формате JSON.  \\
-
-\hline IndexView & Главный модуль & IndexView – класс для отображения главной страницы. & template = 'templates/index.html' – путь к HTML шаблону главной страницы.  \\
-
-\hline GetTopicView & Главный модуль & GetTopicView – класс для получения списка тем с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка тем из базы данных и возврата их в формате JSON.  \\
-
-\hline GetUsersView & Главный модуль & GetUsersView – класс для получения списка пользователей с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка пользователей из базы данных и возврата их в формате JSON.  \\
-
-
-\hline RegisterView & Главный модуль & RegisterView – класс для обработки страницы регистрации. & template = 'templates/register.html' – путь к HTML шаблону страницы регистрации. \\
-
-\hline SendMessageView & Главный модуль & SendMessageView – класс для обработки отправки сообщений. & def post(self, environ) – метод для обработки формы отправки сообщений и сохранения данных в базе данных. Возвращает JSON ответ о статусе операции.   \\
-
-\hline StaticView & Главный модуль & StaticView – класс для обработки статических файлов. & def get(self, environ) – метод для получения статического файла по запросу и возврата его содержимого с соответствующим MIME-типом.   \\
-
-\hline TemplateView & Главный модуль & TemplateView – абстрактный класс для обработки страниц с HTML шаблонами. & template = '' – переменная для пути к HTML шаблону. def get(self, environ) – метод для рендеринга HTML шаблона и возврата его содержимого.   \\
-
-
-\hline TopicPageView & Главный модуль & TopicPageView – класс для отображения страницы конкретной темы. & template = 'templates/topic_page.html' – путь к HTML шаблону страницы темы. \\
-
-
-
-\hline TopicsView & Главный модуль & TopicsView – класс для отображения страницы со списком тем. & template = 'templates/topics.html' – путь к HTML шаблону страницы со списком тем. \\
-
-\hline UserView & Главный модуль & UserView – класс для отображения страницы профиля пользователя. & template = 'templates/user.html' – путь к HTML шаблону страницы профиля.  \\
-
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса View\label{class:table0}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	View & View – основной класс для взаимодействия сервера с веб-страницами. Абстрактный класс, от которого наследуются все остальные view-классы. & template = '' – переменная для шаблонов дочерних классов.
+	def get(self, environ) – метод обработки GET-запросов.
+	def post(self, environ) – метод обработки POST-запросов.
+	def handle(self, environ) – метод для определения типа запроса (GET или POST) и вызова соответствующего метода.  \\
 \end{xltabular}
 \renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса ErrorView\label{class:table1}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	ErrorView & ErrorView – класс для обработки страницы ошибок. & template = template = 'templates/404.html' – путь к HTML шаблону для страницы ошибки.
+	  \\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса GetMessagesView\label{class:table2}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	GetMessagesView & GetMessagesView – класс для получения сообщений с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения сообщений из базы данных и возврата их в формате JSON.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса IndexView\label{class:table3}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	IndexView & IndexView – класс для отображения главной страницы. & template = 'templates/index.html' – путь к HTML шаблону главной страницы.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса GetTopicView\label{class:table4}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	GetTopicView & GetTopicView – класс для получения списка тем с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка тем из базы данных и возврата их в формате JSON.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса GetUsersView\label{class:table5}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	GetUsersView & GetUsersView – класс для получения списка пользователей с сервера. & def get(self, environ) – метод для обработки GET-запроса, получения списка пользователей из базы данных и возврата их в формате JSON.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса RegisterView\label{class:table6}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	RegisterView & RegisterView – класс для обработки страницы регистрации. & template = 'templates/register.html' – путь к HTML шаблону страницы регистрации.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса SendMessageView\label{class:table7}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	MessageView & MessageView – класс для обработки отправки сообщений. & def post(self, environ) – метод для обработки формы отправки сообщений и сохранения данных в базе данных. Возвращает JSON ответ о статусе операции.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса StaticView\label{class:table8}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	StaticView & StaticView – класс для обработки статических файлов. & def get(self, environ) – метод для получения статического файла по запросу и возврата его содержимого с соответствующим MIME-типом.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса TemplateView\label{class:table39}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	TemplateView & TemplateView – абстрактный класс для обработки страниц с HTML шаблонами. & template = '' – переменная для пути к HTML шаблону. def get(self, environ) – метод для рендеринга HTML шаблона и возврата его содержимого.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса TopicPageView\label{class:table10}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	TopicPageView & TopicPageView – класс для отображения страницы конкретной темы. & template = 'templates/topiс\_page' – путь к HTML шаблону страницы темы.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса TopicsView\label{class:table11}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	TopicsView & TopicsView – класс для отображения страницы со списком тем. & template = 'templates/topics.html' – путь к HTML шаблону страницы со списком тем.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса UserView\label{class:table12}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	UserView & UserView – класс для отображения страницы профиля пользователя. & template = 'templates/user.html' – путь к HTML шаблону страницы профиля.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+\renewcommand{\arraystretch}{0.8} % уменьшение расстояний до сетки таблицы
+\begin{xltabular}{\textwidth}{|X|p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}p{6cm}|>{\setlength{\baselineskip}{0.7\baselineskip}}>{\raggedright\arraybackslash}X|}
+	\caption{Описание класса Response\label{class:table13}}\\
+	\hline \centrow \setlength{\baselineskip}{1\baselineskip} Название класса & \centrow \setlength{\baselineskip}{0.7\baselineskip} Описание класса & \centrow Методы \\
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\endfirsthead
+	\hline \centrow 1 & \centrow 2 & \centrow 3\\ \hline
+	\finishhead
+	Response & Response - Этот класс представляет объект ответа сервера, который включает в себя данные, тип контента и HTTP-код ответа. & def get\_data(self) Метод возвращает данные для ответа в виде байтовой строки, закодированных в UTF-8, если self.data является строкой. Если self.data не является строкой (например, это уже байтовые данные), метод возвращает их без изменений.
+	\\
+\end{xltabular}
+\renewcommand{\arraystretch}{1.0} % восстановление сетки
+
+
+
 
 \newpage
 \subsection{Системное тестирование разработанного web-сайта}
@@ -64,15 +206,16 @@ def post(self, environ) – метод для обработки формы со
 
 На рисунке \ref{menu:image} представлен динамический вывод тем.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \center{\includegraphics[width=1\linewidth]{menu}}
 \caption{Динамический вывод тем}
 \label{menu:image}
 \end{figure}
 
+\newpage
 На рисунке \ref{enter:image} представлен ввод данных для публикации темы.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \center{\includegraphics[width=1\linewidth]{enter}}
 \caption{Ввод данных для публикации темы}
 \label{enter:image}
